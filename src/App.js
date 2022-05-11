@@ -9,7 +9,7 @@ function App() {
       <div style={{
         maxWidth: "400px"
       }}>
-        <Input />
+          <Input />
       </div>
       <List />
     </div>

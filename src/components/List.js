@@ -1,33 +1,37 @@
+import API from "../api"
+import {useEffect, useState} from "react";
+
 export function List() {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        API.getUsers().then((res) => {
+            setUsers(res.data);
+            console.log(res.data)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }, [])
+
     return (
         <table className="table">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Status</th>
                 <th scope="col">Name</th>
                 <th scope="col">Age</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            {users.map((user, index) => (
+                <tr key={index}>
+                    <th scope="row">{index}</th>
+                    <td>{user.name}</td>
+                    <td>{user.age}</td>
+                </tr>
+            ))
+            }
             </tbody>
         </table>
     )
